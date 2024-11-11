@@ -33,8 +33,12 @@ const faqData = [
   },
 ];
 
-export function Faq({ isPostsLoaded }) {
+export function Faq() {
+  const [isDOMReady, setIsDOMReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  useEffect(() => {
+    setIsDOMReady(true);
+  }, []);
 
   const toggleFaq = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -43,7 +47,7 @@ export function Faq({ isPostsLoaded }) {
   const faqRef = useRef();
 
   useEffect(() => {
-    if (!isPostsLoaded) return;
+    if (!isDOMReady) return;
     gsap.to(faqRef.current, {
       scrollTrigger: {
         trigger: faqRef.current,
@@ -54,7 +58,7 @@ export function Faq({ isPostsLoaded }) {
       y: "30vh",
       ease: "power2.inOut",
     });
-  }, [isPostsLoaded]);
+  }, [isDOMReady]);
 
   return (
     <section

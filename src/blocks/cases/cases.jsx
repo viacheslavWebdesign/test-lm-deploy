@@ -1,61 +1,34 @@
 import Link from "next/link";
 import { UiButton } from "../../components/uikit/ui-button";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { ArrowTopUpIcon } from "../../components/uikit/icons/arrow-top-up";
-import axios from "axios";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Cases({ onPostsLoaded }) {
-  const [posts, setPosts] = useState([]);
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
 
-  const fetchPosts = async () => {
-    try {
-      const postsRes = await axios.get(
-        "https://letsmake.site/wp-json/wp/v2/cases",
-        { mode: "no-cors" }
-      );
-      const postsData = postsRes.data;
+const case1Src = `${basePath}/images/cases/27.jpg`;
+const case2Src = `${basePath}/images/cases/ltr-min-1.jpg`;
+const case3Src = `${basePath}/images/cases/mens-min-1.jpg`;
+const case4Src = `${basePath}/images/cases/vid-min-1.jpg`;
+const case5Src = `${basePath}/images/cases/super-min-1.jpg`;
 
-      const mediaRequests = postsData.map((post) =>
-        axios.get(
-          `https://letsmake.site/wp-json/wp/v2/media/${post.featured_media}`,
-          { mode: "no-cors" }
-        )
-      );
-      const mediaResponses = await Promise.all(mediaRequests);
-      const mediaData = mediaResponses.map((res) => res.data);
-
-      const combinedData = postsData.map((post) => {
-        const media = mediaData.find(
-          (media) => media.id === post.featured_media
-        );
-        return {
-          ...post,
-          featured_media_url: media ? media.source_url : null,
-          featured_media_alt: media ? media.alt_text : "",
-        };
-      });
-
-      setPosts(combinedData);
-      onPostsLoaded(true);
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
+export function Cases() {
+  const [isDOMReady, setIsDOMReady] = useState(false);
   const casesRef = useRef();
   const casesContainerRef = useRef();
   const casesSectionRef = useRef();
   useEffect(() => {
-    if (posts.length === 0) return;
+    setIsDOMReady(true);
+  }, []);
+  useEffect(() => {
+    if (!isDOMReady) return;
     function getScrollAmount() {
       let casesWidth = casesRef.current.scrollWidth;
       const containerStyle = window.getComputedStyle(casesContainerRef.current);
@@ -120,8 +93,7 @@ export function Cases({ onPostsLoaded }) {
         child.addEventListener("mousemove", handleMouseMove);
       });
     });
-    ScrollTrigger.refresh();
-  }, [posts]);
+  }, [isDOMReady]);
 
   return (
     <div className="bg-zinc-900">
@@ -142,32 +114,118 @@ export function Cases({ onPostsLoaded }) {
             </UiButton>
           </div>
           <div ref={casesRef} className="flex gap-8 md:gap-16">
-            {posts.map((item) => (
-              <Link
-                key={item.id}
-                className="linkMouseBox relative block w-full md:w-1/2 flex-none"
-                href={item.link}
-              >
-                <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
-                  <Image
-                    src={item.featured_media_url}
-                    alt={item.featured_media_alt}
-                    width="700"
-                    height="400"
-                    className="h-full w-full object-cover absolute t-0 l-0"
-                  />
-                </div>
-                <h5 className="font-machina tracking-tighter font-bold text-3xl mt-4 mb-2">
-                  {item.title.rendered}
-                </h5>
-                <p className="opacity-80">
-                  {item.excerpt.rendered.replace(/<[^>]+>/g, "")}
-                </p>
-                <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
-                  <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
-                </div>
-              </Link>
-            ))}
+            <Link
+              className="linkMouseBox relative block w-full md:w-1/2 flex-none"
+              href="#"
+            >
+              <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
+                <Image
+                  src={case1Src}
+                  alt="client"
+                  width="700"
+                  height="400"
+                  className="h-full w-full object-cover absolute t-0 l-0"
+                />
+              </div>
+              <h5 className="font-machina tracking-tighter font-bold text-3xl mt-4 mb-2">
+                Кейси під NDA
+              </h5>
+              <p className="opacity-80">
+                Багато проєктів ми не можемо показувати в піблічній площині. Але
+                досвіду від цього менше не стає
+              </p>
+              <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
+                <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
+              </div>
+            </Link>
+            <Link
+              className="linkMouseBox relative block w-full md:w-1/2 flex-none"
+              href="#"
+            >
+              <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
+                <Image
+                  src={case2Src}
+                  alt="client"
+                  width="700"
+                  height="400"
+                  className="h-full w-full object-cover absolute t-0 l-0"
+                />
+              </div>
+              <h5 className="font-machina tracking-tighter font-bold text-xl md:text-3xl mt-4 mb-2">
+                UX-аудит інтернет-магазину кондитерських виробів La-torta
+              </h5>
+              <p className="opacity-80">
+                Як знайти 341 причину зробити редизайн
+              </p>
+              <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
+                <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
+              </div>
+            </Link>
+            <Link
+              className="linkMouseBox relative block w-full md:w-1/2 flex-none"
+              href="#"
+            >
+              <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
+                <Image
+                  src={case3Src}
+                  alt="client"
+                  width="700"
+                  height="400"
+                  className="h-full w-full object-cover absolute t-0 l-0"
+                />
+              </div>
+              <h5 className="font-machina tracking-tighter font-bold text-xl md:text-3xl mt-4 mb-2">
+                Створення нової сторінки для мувінгової компанії в Канаді
+              </h5>
+              <p className="opacity-80">Ефективне рішення для SEO-просування</p>
+              <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
+                <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
+              </div>
+            </Link>
+            <Link
+              className="linkMouseBox relative block w-full md:w-1/2 flex-none"
+              href="#"
+            >
+              <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
+                <Image
+                  src={case4Src}
+                  alt="client"
+                  width="700"
+                  height="400"
+                  className="h-full w-full object-cover absolute t-0 l-0"
+                />
+              </div>
+              <h5 className="font-machina tracking-tighter font-bold text-xl md:text-3xl mt-4 mb-2">
+                Створення нової сторінки для стоматологічної клініки в Лондоні
+              </h5>
+              <p className="opacity-80">Швидке рішення для запуску реклами</p>
+              <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
+                <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
+              </div>
+            </Link>
+            <Link
+              className="linkMouseBox relative block w-full md:w-1/2 flex-none"
+              href="#"
+            >
+              <div className="w-full relative h-56 md:h-96 overflow-hidden rounded-3xl md:rounded-[36px]">
+                <Image
+                  src={case5Src}
+                  alt="client"
+                  width="700"
+                  height="400"
+                  className="h-full w-full object-cover absolute t-0 l-0"
+                />
+              </div>
+              <h5 className="font-machina tracking-tighter font-bold text-xl md:text-3xl mt-4 mb-2">
+                Розробка сайту для реабілітаційного центру Superhumans
+              </h5>
+              <p className="opacity-80">
+                Як встигнути зробити сайт до відкриття
+              </p>
+              <div className="linkMouse size-14 rounded-full absolute z-[1] pointer-events-none hidden md:block bg-orange-500 top-0 left-0">
+                <ArrowTopUpIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8" />
+              </div>
+            </Link>
           </div>
           <div className="mt-10">
             <UiButton isLink href="#" className="inline-block md:hidden">

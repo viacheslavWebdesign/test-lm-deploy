@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PageLayout } from "../src/layouts/page-layout";
 import { Head } from "../src/blocks/head";
 import { Achievements } from "../src/blocks/achievements";
@@ -10,7 +9,6 @@ import { Faq } from "../src/blocks/faq";
 import { Contacts } from "../src/blocks/contacts";
 
 export default function HomePage() {
-  const [postsLoaded, setPostsLoaded] = useState(false);
   return (
     <PageLayout>
       <Head />
@@ -18,8 +16,8 @@ export default function HomePage() {
       <Services />
       <About />
       <Clients />
-      <Cases onPostsLoaded={setPostsLoaded} />
-      <Faq isPostsLoaded={postsLoaded} />
+      <Cases />
+      <Faq />
       <Contacts />
     </PageLayout>
   );
