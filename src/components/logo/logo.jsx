@@ -12,7 +12,12 @@ import * as THREE from "three";
  * @returns
  */
 
-const logoSrc = "/icons/logo.svg";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const logoSrc = `${basePath}/icons/logo.svg`;
 
 const vertexShader = `
   uniform float uTime;

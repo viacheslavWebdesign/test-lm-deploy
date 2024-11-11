@@ -7,7 +7,12 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const logoSrc = "/icons/logo2.svg";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const logoSrc = `${basePath}/icons/logo2.svg`;
 
 export function Services() {
   useEffect(() => {

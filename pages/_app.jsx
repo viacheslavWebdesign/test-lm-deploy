@@ -1,3 +1,5 @@
+import "../styles/fonts/NeueMachina/stylesheet.css";
+import "../styles/fonts/TTInterfaces/stylesheet.css";
 import "../styles/global.css";
 import { HeadHTML } from "../src/components/headHTML";
 

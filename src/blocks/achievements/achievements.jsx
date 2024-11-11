@@ -1,6 +1,10 @@
 import Image from "next/image";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
 
-const logoSrc = "./icons/logo1.svg";
+const logoSrc = `${basePath}/icons/logo1.svg`;
 
 export function Achievements() {
   return (

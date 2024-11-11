@@ -1,5 +1,6 @@
-@import url("/fonts/TTInterfaces/stylesheet.css");
-@import url("/fonts/NeueMachina/stylesheet.css");
+/* @import url("../../fonts/TTInterfaces/stylesheet.css");
+@import url("../../fonts/NeueMachina/stylesheet.css"); */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

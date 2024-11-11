@@ -1,10 +1,15 @@
 import Image from "next/image";
 
-const facebookIcon = "/icons/social/facebook-icon.png";
-const telegramIcon = "/icons/social/telegram-icon.svg";
-const youtubeIcon = "/icons/social/youtube-icon.svg";
-const instagramIcon = "/icons/social/instagram-icon.svg";
-const dribbbleIcon = "/icons/social/dribbble-icon.svg";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const facebookIcon = `${basePath}/icons/social/facebook-icon.png`;
+const telegramIcon = `${basePath}/icons/social/telegram-icon.svg`;
+const youtubeIcon = `${basePath}/icons/social/youtube-icon.svg`;
+const instagramIcon = `${basePath}/icons/social/instagram-icon.svg`;
+const dribbbleIcon = `${basePath}/icons/social/dribbble-icon.svg`;
 
 export function Footer() {
   return (

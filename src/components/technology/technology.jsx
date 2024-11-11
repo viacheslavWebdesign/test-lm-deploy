@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const matchstickSrc = "/icons/matchstick.svg";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const matchstickSrc = `${basePath}/icons/matchstick.svg`;
 
 export function Technology({ href, children }) {
   return (

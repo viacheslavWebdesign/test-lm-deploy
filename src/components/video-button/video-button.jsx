@@ -3,7 +3,12 @@ import Image from "next/image";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-const videoPreviewSrc = "/images/video-button.jpg";
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const videoPreviewSrc = `${basePath}/images/video-button.jpg`;
 
 export function VideoButton({ className, href }) {
   return (

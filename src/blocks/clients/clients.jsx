@@ -3,6 +3,22 @@ import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_PATH
+    : "";
+
+const clientsImages = [
+  "/images/clients/creatifwood.png",
+  "/images/clients/harmandi.png",
+  "/images/clients/medicover-logo.png",
+  "/images/clients/mens.svg",
+  "/images/clients/pomidoros.png",
+  "/images/clients/stem.png",
+  "/images/clients/superhumans.svg",
+  "/images/clients/vidadent.svg",
+];
+
 export function Clients() {
   const [currentClient, setCurrentClient] = useState(0);
   const clientsRef = useRef(null);
@@ -99,22 +115,13 @@ export function Clients() {
           </p>
           <div className="flex items-center justify-end">
             <div className="clientsList h-6 md:h-20 mr-4 md:mr-8">
-              {[
-                "/images/clients/creatifwood.png",
-                "/images/clients/harmandi.png",
-                "/images/clients/medicover-logo.png",
-                "/images/clients/mens.svg",
-                "/images/clients/pomidoros.png",
-                "/images/clients/stem.png",
-                "/images/clients/superhumans.svg",
-                "/images/clients/vidadent.svg",
-              ].map((src, index) => (
+              {clientsImages.map((src, index) => (
                 <Image
                   key={src}
                   className={`w-auto h-full ${
                     index === currentClient ? "" : "hidden"
                   }`}
-                  src={src}
+                  src={`${basePath}${src}`} // Применяем базовый путь
                   alt="client"
                   width="600"
                   height="200"
