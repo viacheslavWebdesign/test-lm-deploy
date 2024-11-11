@@ -1,0 +1,140 @@
+.overlayEntering {
+  opacity: 0;
+}
+
+.overlayEntered {
+  opacity: 1;
+  transition: opacity 0.5s ease-in 0s;
+}
+
+.overlayExiting {
+  opacity: 1;
+}
+
+.overlayExited {
+  opacity: 0;
+  transition: opacity 0.5s ease-out 0.5s;
+}
+
+.menuEntering {
+  opacity: 0;
+  max-width: 0px;
+  max-height: 0px;
+  transform: translate(-25px, 7px);
+}
+
+.menuEntered {
+  opacity: 1;
+  max-width: calc(100vw - 16px);
+  max-height: 600px;
+  transform: translate(0px, 0px);
+  transition: max-width 0.4s ease-in, max-height 0.4s ease-in,
+    transform 0.4s ease-in, opacity 0.1s ease-in;
+}
+
+.menuExiting {
+  opacity: 1;
+  max-width: calc(100vw - 16px);
+  max-height: 600px;
+  transform: translate(0px, 0px);
+}
+
+.menuExited {
+  opacity: 0;
+  max-width: 0px;
+  max-height: 0px;
+  transform: translate(-25px, 7px);
+  transition: max-width 0.4s ease-out 0.75s, max-height 0.4s ease-out 0.75s,
+    transform 0.4s ease-out 0.75s, opacity 0.1s ease-out 1.15s;
+}
+
+.logoEntering {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.logoEntered {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 0.3s opacity ease-in 0.4s, 0.3s transform ease-in 0.4s;
+}
+.logoExiting {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.logoExited {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: 0.3s opacity ease-out 0.45s, 0.3s transform ease-out 0.45s;
+}
+
+.navEntering {
+  opacity: 0;
+  transform: translateY(25px);
+}
+.navEntered {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 0.3s opacity ease-in 0.55s, 0.3s transform ease-in 0.55s;
+}
+.navExiting {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.navExited {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: 0.3s opacity ease-out 0.3s, 0.3s transform ease-out 0.3s;
+}
+
+.contactsEntering {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.contactsEntered {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 0.3s opacity ease-in 0.7s, 0.3s transform ease-in 0.7s;
+}
+.contactsExiting {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.contactsExited {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s opacity ease-out 0.15s, 0.3s transform ease-out 0.15s;
+}
+
+.socEntering {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.socEntered {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 0.3s opacity ease-in 0.85s, 0.3s transform ease-in 0.85s;
+}
+.socExiting {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.socExited {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s opacity ease-out 0s, 0.3s transform ease-out 0s;
+}
+
+@media only screen and (min-width: 768px) {
+  .menuEntering {
+    transform: translate(-17px, 25px);
+  }
+  .menuEntered,
+  .menuExiting {
+    max-width: 560px;
+    transform: translate(0px, 0px);
+  }
+  .menuExited {
+    max-width: 0px;
+    transform: translate(-17px, 25px);
+  }
+}
