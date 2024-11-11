@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 
-export const HeadHTML = () => {
-  const [yoastHeadData, setYoastHeadData] = useState(null);
-  useEffect(() => {
-    fetch("https://letsmake.site/wp-json/wp/v2/pages/248")
-      .then((res) => res.json())
-      .then((data) => {
-        setYoastHeadData(data.yoast_head_json);
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
-  if (!yoastHeadData) return null;
-  return (
-    <Head>
-      {/* <title>
+export const HeadHTML = () => (
+  <Head>
+      <title>
         Розробка сайту у веб-студії Letsmake.site | Професійна розробка сайтів в
         Україні
       </title>
@@ -22,37 +10,5 @@ export const HeadHTML = () => {
         name="description"
         content="Розробка сайтів на WordPress, Shopify та Webflow. Дизайн, розробка та підтримка сайтів. Пишіть!"
       />
-       */}
-      <title>{yoastHeadData.title}</title>
-      <meta name="description" content={yoastHeadData.description} />
-      <meta name="robots" content={yoastHeadData.robots.index} />
-      <meta name="robots" content={yoastHeadData.robots.follow} />
-      <meta property="og:locale" content={yoastHeadData.og_locale} />
-      <meta property="og:type" content={yoastHeadData.og_type} />
-      <meta property="og:title" content={yoastHeadData.og_title} />
-      <meta property="og:description" content={yoastHeadData.og_description} />
-      <meta property="og:url" content={yoastHeadData.og_url} />
-      <meta property="og:site_name" content={yoastHeadData.og_site_name} />
-      <meta
-        property="article:modified_time"
-        content={yoastHeadData.article_modified_time}
-      />
-      <meta property="og:image" content={yoastHeadData.og_image[0]?.url} />
-      <meta
-        property="og:image:width"
-        content={yoastHeadData.og_image[0]?.width}
-      />
-      <meta
-        property="og:image:height"
-        content={yoastHeadData.og_image[0]?.height}
-      />
-      <meta name="twitter:card" content={yoastHeadData.twitter_card} />
-      <meta name="twitter:title" content={yoastHeadData.twitter_title} />
-      <meta
-        name="twitter:description"
-        content={yoastHeadData.twitter_description}
-      />
-      <meta name="twitter:image" content={yoastHeadData.twitter_image} />
     </Head>
-  );
-};
+);

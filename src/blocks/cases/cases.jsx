@@ -15,13 +15,15 @@ export function Cases({ onPostsLoaded }) {
   const fetchPosts = async () => {
     try {
       const postsRes = await axios.get(
-        "https://letsmake.site/wp-json/wp/v2/cases"
+        "https://letsmake.site/wp-json/wp/v2/cases",
+        { mode: "no-cors" }
       );
       const postsData = postsRes.data;
 
       const mediaRequests = postsData.map((post) =>
         axios.get(
-          `https://letsmake.site/wp-json/wp/v2/media/${post.featured_media}`
+          `https://letsmake.site/wp-json/wp/v2/media/${post.featured_media}`,
+          { mode: "no-cors" }
         )
       );
       const mediaResponses = await Promise.all(mediaRequests);
